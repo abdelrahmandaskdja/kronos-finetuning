@@ -1,0 +1,18 @@
+Kronos BTC Directional Forecasting
+Copyright (c) 2026 Abdelrahman Osman
+
+This repository is an academic derivative work based on the open-source Kronos
+project by Yu Shi and contributors:
+
+  https://github.com/shiyu-coder/Kronos
+  https://arxiv.org/abs/2508.02739
+
+The upstream Kronos source is distributed under the MIT License. This
+repository retains that license and upstream attribution. Original work in this
+repository includes the BTCUSDT data workflows, horizon-specific adaptation
+experiments, structured-pruning studies, evaluation artifacts, deployment
+prototypes, and research presentation materials.
+
+Model checkpoints were produced by fine-tuning or adapting Kronos-family
+models. Users should review both this repository's LICENSE and the terms of the
+upstream model checkpoints and data providers.

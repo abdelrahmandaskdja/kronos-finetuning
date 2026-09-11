@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this project, please cite this software and the upstream Kronos paper."
+title: "Kronos BTC Directional Forecasting"
+type: software
+authors:
+  - family-names: Osman
+    given-names: Abdelrahman
+version: 1.0.0
+date-released: 2026-09-10
+repository-code: "https://github.com/abdelrahmandaskdja/kronos-finetuning"
+url: "https://huggingface.co/abdelrahman964/kronos-finetuning"
+license: MIT
+keywords:
+  - financial forecasting
+  - Bitcoin
+  - time series
+  - foundation models
+  - structured pruning
+  - Kronos
+preferred-citation:
+  type: software
+  authors:
+    - family-names: Osman
+      given-names: Abdelrahman
+  title: "Kronos BTC Directional Forecasting"
+  year: 2026
+  version: 1.0.0
+  url: "https://github.com/abdelrahmandaskdja/kronos-finetuning"
