@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+</head>
+<body data-page="{{ active_page }}">
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="noise-layer"></div>
+
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('historical_overview') }}">
+            <span class="brand-mark">K</span>
+            <span class="brand-text">
+                <strong>Kronos Signal Board</strong>
+                <small>5min, 15min, 1day model tracking</small>
+            </span>
+        </a>
+
+        <nav class="site-nav">
+            <a class="{{ 'is-active' if active_page == 'overview' else '' }}" href="{{ url_for('historical_overview') }}">Historical Overview</a>
+            <a class="{{ 'is-active' if active_page == 'detail' else '' }}" href="{{ url_for('historical_detail', timeframe='5min') }}">Historical Detail</a>
+            <a class="{{ 'is-active' if active_page == 'live' else '' }}" href="{{ url_for('live_predictions') }}">Live Polling</a>
+            <a href="{{ url_for('legacy_lab') }}">Legacy Lab</a>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='site.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

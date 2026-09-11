@@ -1,0 +1,36 @@
+{
+  "symbol": "BTCFDUSD",
+  "api": {
+    "key_env": "BINANCE_15M_API_KEY",
+    "secret_env": "BINANCE_15M_API_SECRET"
+  },
+  "strategy": {
+    "mode": "single_interval",
+    "single_interval": "15m",
+    "primary_interval": "15m"
+  },
+  "models": {
+    "15m": {
+      "lookback": 512
+    }
+  },
+  "execution": {
+    "maker_client_order_prefix": "k15fdd",
+    "allow_same_bar_order_maintenance": true,
+    "same_bar_maintenance_requires_existing_order": true,
+    "primary_same_bar_maintenance_interval_ms": 500,
+    "ws_order_entry": true,
+    "use_primary_peg_limit_maker": true
+  },
+  "risk": {
+    "min_rebalance_notional_usdt": 5.0
+  },
+  "paths": {
+    "runtime_root": "./trading/runtime/strategy_15m_only_btcfdusd",
+    "state_path": "./trading/runtime/strategy_15m_only_btcfdusd/state.json",
+    "signal_log_path": "./trading/runtime/strategy_15m_only_btcfdusd/signal_log.jsonl",
+    "order_log_path": "./trading/runtime/strategy_15m_only_btcfdusd/order_log.jsonl",
+    "status_log_path": "./trading/runtime/strategy_15m_only_btcfdusd/status_log.jsonl",
+    "market_cache_dir": "./trading/runtime/strategy_15m_only_btcfdusd/market_cache"
+  }
+}

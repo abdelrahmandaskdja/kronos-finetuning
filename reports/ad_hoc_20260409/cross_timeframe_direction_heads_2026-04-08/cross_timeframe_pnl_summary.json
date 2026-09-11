@@ -1,0 +1,125 @@
+{
+  "rows": [
+    {
+      "model_key": "5min_winner",
+      "model_label": "5min native direction head",
+      "interval": "1m",
+      "rows": 141120,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 23:59:00",
+      "total_pnl_usdt_1btc": -22060.619999992326,
+      "avg_pnl_per_trade_usdt": -0.15632525510198644,
+      "compounded_return_pct": -33.042431654329995
+    },
+    {
+      "model_key": "5min_winner",
+      "model_label": "5min native direction head",
+      "interval": "15m",
+      "rows": 9408,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 23:45:00",
+      "total_pnl_usdt_1btc": 46239.10999999952,
+      "avg_pnl_per_trade_usdt": 4.9148713860543705,
+      "compounded_return_pct": 71.84745306185
+    },
+    {
+      "model_key": "5min_winner",
+      "model_label": "5min native direction head",
+      "interval": "1h",
+      "rows": 2352,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 23:00:00",
+      "total_pnl_usdt_1btc": 8131.92999999976,
+      "avg_pnl_per_trade_usdt": 3.457453231292415,
+      "compounded_return_pct": 5.403328573692545
+    },
+    {
+      "model_key": "5min_winner",
+      "model_label": "5min native direction head",
+      "interval": "4h",
+      "rows": 588,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 20:00:00",
+      "total_pnl_usdt_1btc": -22150.310000000158,
+      "avg_pnl_per_trade_usdt": -37.67059523809551,
+      "compounded_return_pct": -29.099349383447116
+    },
+    {
+      "model_key": "5min_winner",
+      "model_label": "5min native direction head",
+      "interval": "1d",
+      "rows": 98,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 00:00:00",
+      "total_pnl_usdt_1btc": -10531.810000000056,
+      "avg_pnl_per_trade_usdt": -107.4674489795924,
+      "compounded_return_pct": -11.34906860860605
+    },
+    {
+      "model_key": "1h_pruned50_winner",
+      "model_label": "1h pruned50 direction head",
+      "interval": "1m",
+      "rows": 141120,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 23:59:00",
+      "total_pnl_usdt_1btc": -9096.81999999209,
+      "avg_pnl_per_trade_usdt": -0.0644615929704655,
+      "compounded_return_pct": -16.09256537775864
+    },
+    {
+      "model_key": "1h_pruned50_winner",
+      "model_label": "1h pruned50 direction head",
+      "interval": "15m",
+      "rows": 9408,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 23:45:00",
+      "total_pnl_usdt_1btc": 29209.629999999117,
+      "avg_pnl_per_trade_usdt": 3.104765093537321,
+      "compounded_return_pct": 40.64481848137669
+    },
+    {
+      "model_key": "1h_pruned50_winner",
+      "model_label": "1h pruned50 direction head",
+      "interval": "1h",
+      "rows": 2352,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 23:00:00",
+      "total_pnl_usdt_1btc": 11998.570000000022,
+      "avg_pnl_per_trade_usdt": 5.101432823129261,
+      "compounded_return_pct": 12.72692672445066
+    },
+    {
+      "model_key": "1h_pruned50_winner",
+      "model_label": "1h pruned50 direction head",
+      "interval": "4h",
+      "rows": 588,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 20:00:00",
+      "total_pnl_usdt_1btc": -35116.15000000002,
+      "avg_pnl_per_trade_usdt": -59.721343537415,
+      "compounded_return_pct": -39.906050770611614
+    },
+    {
+      "model_key": "1h_pruned50_winner",
+      "model_label": "1h pruned50 direction head",
+      "interval": "1d",
+      "rows": 98,
+      "window_start": "2026-01-01 00:00:00",
+      "window_end": "2026-04-08 00:00:00",
+      "total_pnl_usdt_1btc": -20043.99000000005,
+      "avg_pnl_per_trade_usdt": -204.53051020408213,
+      "compounded_return_pct": -21.555003739574186
+    }
+  ],
+  "best": {
+    "model_key": "5min_winner",
+    "model_label": "5min native direction head",
+    "interval": "15m",
+    "rows": 9408,
+    "window_start": "2026-01-01 00:00:00",
+    "window_end": "2026-04-08 23:45:00",
+    "total_pnl_usdt_1btc": 46239.10999999952,
+    "avg_pnl_per_trade_usdt": 4.9148713860543705,
+    "compounded_return_pct": 71.84745306185
+  }
+}

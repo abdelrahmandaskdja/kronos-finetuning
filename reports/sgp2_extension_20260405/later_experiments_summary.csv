@@ -1,0 +1,6 @@
+experiment_family,window,metric,accuracy_pct,baseline_pct,delta_vs_baseline_pp,note
+1h CE sweep final retrain,2026-01-01 to 2026-03-04,candle close vs open,49.532710280373834,50.734312416555404,-1.2016021361815732,Later 1h consecutive-path retrain stayed below baseline and did not beat pruned50.
+1d generalization retrain,2025-11-02 to 2025-12-31,close vs prev actual close,58.333333333333336,56.666666666666664,1.6666666666666718,"Generalization improved on the late-2025 holdout, but only modestly."
+1d generalization retrain,2026-01-01 to 2026-02-16,close vs prev actual close,55.319148936170215,57.446808510638306,-2.127659574468088,Same family became only roughly baseline on the 2026 slice.
+1d context-mag retrain,2026-01-01 to 2026-03-28,close vs prev actual close,52.87356321839081,56.32183908045977,-3.4482758620689613,Context-magnitude idea did not beat the baseline on the later March window.
+1d context-mag full-2025 ckpt,2026-01-01 to 2026-03-28,close vs prev close path,56.32183908045977,56.32183908045977,0.0,"Full-2025 checkpoint matched the baseline by path metric, but not above it."

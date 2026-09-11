@@ -1,0 +1,6 @@
+interval,winner_model,winner_accuracy_all_rows_pct,runner_up_model,runner_up_accuracy_all_rows_pct,gap_pp
+15m,5min native direction head,53.039965986394556,1h pruned50 direction head,52.79549319727891,0.24447278911564752
+1d,5min native direction head,48.97959183673469,1h pruned50 direction head,45.91836734693878,3.0612244897959116
+1h,1h pruned50 direction head,53.273809523809526,5min native direction head,52.763605442176875,0.5102040816326507
+1m,1h pruned50 direction head,51.50297619047619,5min native direction head,51.485969387755105,0.01700680272108457
+4h,1h pruned50 direction head,51.19047619047619,5min native direction head,50.85034013605442,0.34013605442176953

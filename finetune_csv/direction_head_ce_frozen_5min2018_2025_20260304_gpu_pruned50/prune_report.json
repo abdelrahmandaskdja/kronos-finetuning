@@ -1,0 +1,10 @@
+{
+  "input_checkpoint": "./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu/best_direction_model.pt",
+  "output_checkpoint": "./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu_pruned50/best_direction_model.pt",
+  "method": "global-per-tensor-magnitude-50pct",
+  "note": "Unstructured zeroing of ~50% weights on tensors with ndim>=2",
+  "prunable_tensors": 99,
+  "prunable_params_total": 102243648,
+  "prunable_params_remaining_nonzero": 51121824,
+  "prunable_sparsity": 0.5
+}

@@ -1,0 +1,4 @@
+interval_label,model_label,rows,range_start,range_end,accuracy_pct,baseline_pct,delta_vs_baseline_pp,total_pnl_usdt,compounded_return_pct,rationale
+5min,5-minute native direction head,19554,2026-01-01 00:00:00,2026-03-09 21:25:00,51.39613378336914,50.158535338038256,1.2375984453308786,5836.580000000758,1.7179143067570068,Native 5-minute supervision won narrowly on absolute USDT PnL; advantage is modest.
+1h,1-hour pruned50 direction head,1498,2026-01-01 00:00:00,2026-03-04 09:00:00,53.67156208277704,50.73431241655542,2.9372496662216196,6069.510000000191,4.307192480248001,"50% pruning gave the best accuracy, the only positive hourly PnL, and the smallest up-bias gap."
+1d,1-day last6 path adapter,75,2026-01-01 00:00:00,2026-03-16 00:00:00,62.66666666666667,53.333333333333336,9.333333333333337,28035.709999999963,43.29545763447,Pure consecutive-path objective with last-6-layer unfreezing dominated both hybrid and shallower variants.

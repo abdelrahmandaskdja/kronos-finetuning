@@ -1,0 +1,41 @@
+{
+  "mode": "direction_head_inference_actual_feed_pruned50",
+  "device": "cuda:1",
+  "checkpoint_path": "./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu_pruned50/best_direction_model.pt",
+  "range_start": "2026-01-01 00:00:00",
+  "range_end": "2026-03-04 23:59:59",
+  "range_start_actual": "2026-01-01 00:00:00",
+  "range_end_actual": "2026-03-04 09:00:00",
+  "lookback_window": 512,
+  "horizon_steps": 1,
+  "all_rows_metrics": {
+    "rows": 1498,
+    "directional_accuracy_open_vs_close": 0.5367156208277704,
+    "majority_baseline_accuracy": 0.507343124165554,
+    "actual_up_ratio": 0.49265687583444595,
+    "predicted_up_ratio": 0.5700934579439252,
+    "confusion": {
+      "tp": 449,
+      "tn": 355,
+      "fp": 405,
+      "fn": 289
+    }
+  },
+  "masked_rows_metrics": {
+    "rows": 1094,
+    "directional_accuracy_open_vs_close": 0.5365630712979891,
+    "majority_baseline_accuracy": 0.5018281535648994,
+    "actual_up_ratio": 0.49817184643510054,
+    "predicted_up_ratio": 0.5868372943327239,
+    "confusion": {
+      "tp": 340,
+      "tn": 247,
+      "fp": 302,
+      "fn": 205
+    }
+  },
+  "checkpoint_load": {
+    "missing_keys": [],
+    "unexpected_keys": []
+  }
+}

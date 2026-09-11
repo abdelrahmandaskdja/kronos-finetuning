@@ -1,0 +1,110 @@
+{% extends "base_dashboard.html" %}
+
+{% block content %}
+<section class="hero compact reveal">
+    <div class="hero-copy">
+        <p class="eyebrow">Live Polling</p>
+        <h1>Latest local kline files plus fresh finetuned forecasts.</h1>
+        <p class="hero-text">
+            This page polls the local repo every {{ live_snapshot.poll_seconds }} seconds. Each card refreshes BTCUSDT candles from Binance when possible, then runs the local finetuned checkpoint on the newest available context for that horizon.
+        </p>
+    </div>
+    <div class="hero-side glass-panel">
+        <span class="meta-label">Current payload</span>
+        <strong id="live-generated-at">{{ live_snapshot.generated_at }}</strong>
+        <p id="live-status-copy">Polling active. Cards below update in place when local files move.</p>
+    </div>
+</section>
+
+<section class="split-panel reveal">
+    <article class="glass-panel">
+        <p class="eyebrow">How to read this page</p>
+        <ul class="plain-list">
+            <li><strong>Market lag:</strong> minutes since the latest candle inside the tracked kline file.</li>
+            <li><strong>Forecast lag:</strong> minutes since the first predicted step currently shown on the card.</li>
+            <li><strong>Pred move:</strong> expected next-step move from the prediction rule used by that horizon.</li>
+        </ul>
+    </article>
+    <article class="glass-panel accent-panel">
+        <p class="eyebrow">Honest caveat</p>
+        <h2>Inference is fresh, but only as fresh as the local candle files.</h2>
+        <p>
+            The page reruns local finetuned inference from Binance-refreshed candle files when the API is reachable. If Binance is unavailable, it falls back to the most recent cached or local file and shows that on the card.
+        </p>
+    </article>
+</section>
+
+<section class="card-grid reveal" id="live-card-grid">
+    {% for card in live_snapshot.cards %}
+    <article class="metric-card live-card" data-live-card="{{ card.slug }}">
+        <div class="card-topline">
+            <span class="interval-pill">{{ card.display_interval }}</span>
+            <span class="status-pill">{{ card.status_label }}</span>
+        </div>
+        <h2>{{ card.title }}</h2>
+
+        <div class="signal-row">
+            <span class="signal-badge {{ 'signal-up' if card.signal.direction == 'Up' else 'signal-down' if card.signal.direction == 'Down' else 'signal-neutral' }}">{{ card.signal.direction }}</span>
+            <div class="signal-meta">
+                <span>Signal timestamp</span>
+                <strong data-field="signal-timestamp">{{ card.signal.timestamp }}</strong>
+            </div>
+        </div>
+
+        <div class="metric-row compact">
+            <div>
+                <span class="metric-label">Market Close</span>
+                <strong data-field="market-close">{{ card.market.last.close if card.market else 'n/a' }}</strong>
+            </div>
+            <div>
+                <span class="metric-label">Pred Move</span>
+                <strong data-field="signal-move">{{ (card.signal.move_pct ~ '%') if card.signal.move_pct is not none else 'n/a' }}</strong>
+            </div>
+            <div>
+                <span class="metric-label">Pred Close</span>
+                <strong data-field="signal-pred-close">{{ card.signal.predicted_close if card.signal.predicted_close is not none else 'n/a' }}</strong>
+            </div>
+        </div>
+
+        <div class="metric-row compact">
+            <div>
+                <span class="metric-label">Market Lag</span>
+                <strong data-field="market-lag">{{ card.market_lag_minutes if card.market_lag_minutes is not none else 'n/a' }}</strong>
+            </div>
+            <div>
+                <span class="metric-label">Forecast Lag</span>
+                <strong data-field="signal-lag">{{ card.prediction_lag_minutes if card.prediction_lag_minutes is not none else 'n/a' }}</strong>
+            </div>
+        </div>
+
+        <div class="mini-chart" id="sparkline-{{ card.slug }}"></div>
+
+        <div class="forecast-mini-list" data-field="forecast-list">
+            {% if card.forecast_rows %}
+                {% for row in card.forecast_rows %}
+                <div class="forecast-mini-item">
+                    <span>{{ row.timestamp }}</span>
+                    <strong>{{ row.direction }} · {{ row.close }}</strong>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="forecast-mini-item">
+                    <span>No forecast rows</span>
+                    <strong>{{ card.signal.direction }}</strong>
+                </div>
+            {% endif %}
+        </div>
+
+        <p class="card-footnote" data-field="market-source">Market source: {{ card.market_source_label }}</p>
+        <p class="card-footnote" data-field="source-generated">Inference refresh: {{ card.source_generated_at }}</p>
+        <p class="card-footnote" data-field="card-error">{{ card.error if card.error else '' }}</p>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.LIVE_SNAPSHOT = {{ live_snapshot | tojson }};
+</script>
+{% endblock %}

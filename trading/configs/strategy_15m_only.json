@@ -1,0 +1,18 @@
+{
+  "strategy": {
+    "mode": "single_interval",
+    "single_interval": "15m",
+    "primary_interval": "15m"
+  },
+  "execution": {
+    "maker_client_order_prefix": "k15mmkr"
+  },
+  "paths": {
+    "runtime_root": "./trading/runtime/strategy_15m_only",
+    "state_path": "./trading/runtime/strategy_15m_only/state.json",
+    "signal_log_path": "./trading/runtime/strategy_15m_only/signal_log.jsonl",
+    "order_log_path": "./trading/runtime/strategy_15m_only/order_log.jsonl",
+    "status_log_path": "./trading/runtime/strategy_15m_only/status_log.jsonl",
+    "market_cache_dir": "./trading/runtime/strategy_15m_only/market_cache"
+  }
+}

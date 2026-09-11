@@ -1,0 +1,4 @@
+binance-sdk-spot==7.2.0
+numpy>=1.26,<3
+requests>=2.31,<3
+websockets>=13,<16

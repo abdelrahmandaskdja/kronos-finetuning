@@ -1,0 +1,278 @@
+{% extends "base_dashboard.html" %}
+
+{% block content %}
+<section class="hero reveal">
+    <div class="hero-copy">
+        <p class="eyebrow">Archived Benchmark Readout</p>
+        <h1>Best saved Kronos models, split by horizon.</h1>
+        <p class="hero-text">
+            This site turns the repo's saved evidence into a cleaner product view: one overview page, one deep historical page, and one polling page that watches the latest local market and forecast artifacts.
+        </p>
+    </div>
+    <div class="hero-side glass-panel">
+        <span class="meta-label">Data snapshot</span>
+        <strong>{{ generated_at }}</strong>
+        <p>The cards below use the repo's selected 5-minute winner, the best available 15-minute artifact, and the strongest saved 1-day deployment result.</p>
+    </div>
+</section>
+
+<section class="card-grid reveal">
+    {% for model in models %}
+    <article class="metric-card {{ model.note_level }}">
+        <div class="card-topline">
+            <span class="interval-pill">{{ model.display_interval }}</span>
+            <span class="status-pill">{{ model.status_label }}</span>
+        </div>
+        <h2>{{ model.title }}</h2>
+        <p class="card-note">{{ model.rationale }}</p>
+
+        <div class="metric-row">
+            <div>
+                <span class="metric-label">Direction accuracy</span>
+                <strong>{{ model.accuracy_pct }}%</strong>
+            </div>
+            <div>
+                <span class="metric-label">Baseline</span>
+                <strong>{{ model.baseline_pct }}%</strong>
+            </div>
+            <div>
+                <span class="metric-label">Edge</span>
+                <strong class="{{ 'text-up' if model.delta_vs_baseline_pp >= 0 else 'text-down' }}">{{ model.delta_vs_baseline_pp }} pp</strong>
+            </div>
+        </div>
+
+        <div class="metric-row compact">
+            <div>
+                <span class="metric-label">Rows</span>
+                <strong>{{ model.rows }}</strong>
+            </div>
+            <div>
+                <span class="metric-label">Predicted Up</span>
+                <strong>{{ model.predicted_up_ratio_pct }}%</strong>
+            </div>
+            <div>
+                <span class="metric-label">Actual Up</span>
+                <strong>{{ model.actual_up_ratio_pct }}%</strong>
+            </div>
+        </div>
+
+        <div class="metric-row compact">
+            <div>
+                <span class="metric-label">PnL</span>
+                <strong>{{ model.total_pnl_usdt if model.total_pnl_usdt is not none else 'n/a' }}</strong>
+            </div>
+            <div>
+                <span class="metric-label">Compounded</span>
+                <strong>{{ (model.compounded_return_pct ~ '%') if model.compounded_return_pct is not none else 'n/a' }}</strong>
+            </div>
+        </div>
+
+        <p class="card-footnote">{{ model.caveat }}</p>
+    </article>
+    {% endfor %}
+</section>
+
+<section class="chart-grid reveal">
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Accuracy</p>
+                <h2>Direction accuracy vs majority baseline</h2>
+            </div>
+        </div>
+        <div id="overview-accuracy-chart" class="chart-frame"></div>
+    </article>
+
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Economics</p>
+                <h2>Saved PnL by horizon</h2>
+            </div>
+        </div>
+        <div id="overview-pnl-chart" class="chart-frame"></div>
+    </article>
+</section>
+
+<section class="split-panel reveal">
+    <article class="glass-panel accent-panel">
+        <p class="eyebrow">Important context</p>
+        <h2>Published middle-horizon benchmark is still 1h, not 15min.</h2>
+        <p>
+            The repo's strongest published middle-horizon evidence is the hourly pruned-50 model. The 15-minute page is still valuable, but it is based on the best clean 15-minute artifact currently saved in the repo rather than the conference-summary winner set.
+        </p>
+        <div class="metric-row">
+            <div>
+                <span class="metric-label">1h accuracy</span>
+                <strong>{{ hourly_reference.accuracy_pct }}%</strong>
+            </div>
+            <div>
+                <span class="metric-label">1h baseline</span>
+                <strong>{{ hourly_reference.baseline_pct }}%</strong>
+            </div>
+            <div>
+                <span class="metric-label">1h PnL</span>
+                <strong>{{ hourly_reference.total_pnl_usdt }}</strong>
+            </div>
+        </div>
+    </article>
+
+    <article class="glass-panel">
+        <p class="eyebrow">Navigation</p>
+        <h2>How to use this dashboard</h2>
+        <ul class="plain-list">
+            <li><strong>Historical Overview:</strong> compare the best saved models across 5min, 15min, and 1day.</li>
+            <li><strong>Historical Detail:</strong> inspect rolling accuracy, recent signals, and confusion patterns for one timeframe at a time.</li>
+            <li><strong>Live Polling:</strong> watch the latest local market files and forecast artifacts update in place.</li>
+        </ul>
+    </article>
+</section>
+
+<section class="table-stack reveal">
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Hourly Reference</p>
+                <h2>Pruning ladder that produced the published 1h winner</h2>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Variant</th>
+                        <th>Accuracy</th>
+                        <th>Baseline</th>
+                        <th>Edge</th>
+                        <th>PnL</th>
+                        <th>Bias Gap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in hourly_pruning_rows %}
+                    <tr>
+                        <td>{{ row.variant_label }}</td>
+                        <td>{{ row.accuracy_pct }}%</td>
+                        <td>{{ row.baseline_pct }}%</td>
+                        <td>{{ row.delta_vs_baseline_pp }} pp</td>
+                        <td>{{ row.total_pnl_1btc_usdt }}</td>
+                        <td>{{ row.bias_gap_pp }} pp</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Daily Screening</p>
+                <h2>Why the last6 path adapter won at 1day</h2>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Objective</th>
+                        <th>Accuracy</th>
+                        <th>Edge</th>
+                        <th>PnL</th>
+                        <th>Bias Gap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in daily_screening_rows %}
+                    <tr>
+                        <td>{{ row.model_name }}</td>
+                        <td>{{ row.objective_mode }}</td>
+                        <td>{{ row.accuracy_pct }}%</td>
+                        <td>{{ row.delta_vs_baseline_pp }} pp</td>
+                        <td>{{ row.total_pnl_usdt }}</td>
+                        <td>{{ row.bias_gap_pp }} pp</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Daily Stability</p>
+                <h2>Winner margin after the initial March window</h2>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Window End</th>
+                        <th>Rows</th>
+                        <th>Path Accuracy</th>
+                        <th>Baseline</th>
+                        <th>Edge</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in daily_extension_rows %}
+                    <tr>
+                        <td>{{ row.window_end }}</td>
+                        <td>{{ row.rows }}</td>
+                        <td>{{ row.path_accuracy_pct }}%</td>
+                        <td>{{ row.baseline_pct }}%</td>
+                        <td>{{ row.delta_vs_baseline_pp }} pp</td>
+                        <td>{{ row.notes }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">5-Minute Legacy</p>
+                <h2>Older consecutive baselines that the native direction head beat</h2>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Run</th>
+                        <th>Rows</th>
+                        <th>Accuracy</th>
+                        <th>Baseline</th>
+                        <th>Edge</th>
+                        <th>Family</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in legacy_5min_rows %}
+                    <tr>
+                        <td>{{ row.run_name }}</td>
+                        <td>{{ row.rows }}</td>
+                        <td>{{ row.accuracy_pct }}%</td>
+                        <td>{{ row.baseline_pct }}%</td>
+                        <td>{{ row.delta_vs_baseline_pp }} pp</td>
+                        <td>{{ row.family }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.OVERVIEW_CHART_ROWS = {{ chart_rows | tojson }};
+</script>
+{% endblock %}

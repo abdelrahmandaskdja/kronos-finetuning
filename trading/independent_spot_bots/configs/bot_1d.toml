@@ -1,0 +1,49 @@
+[bot]
+name = "btcfdusd-1d-live"
+client_order_id_prefix = "kr1dfd"
+symbol = "BTCFDUSD"
+timeframe = "1d"
+lookback = 256
+predlen = 16
+model_type = "kronos_consecutive"
+model_path = "../../../finetune_csv/runs_requested_by_user/retrain_1m_2017_2024_ce_consdir_leakfix_20260409_214258/finetuned/BTCUSDT_kline_1m_2017_2024_ce_consdir_leakfix/basemodel/best_model"
+tokenizer_path = "../../../finetune_csv/runs_requested_by_user/retrain_1m_2017_2024_ce_consdir_leakfix_20260409_214258/finetuned/BTCUSDT_kline_1m_2017_2024_ce_consdir_leakfix/tokenizer/best_model"
+device = "cpu"
+clip = 5.0
+direction_mode = "close_to_close"
+stabilize_output = true
+stability_context_path = "../../../finetune_csv/data/BTCUSDT_kline_1d_2017_2025.csv"
+
+[runtime]
+environment = "live"
+dry_run = false
+use_websocket_close_detection = false
+polling_fallback_enabled = true
+polling_interval_seconds = 60
+simulated_quote_balance = 1000
+simulated_base_balance = 0
+log_file_path = "../runtime/logs/bot_1d_btcfdusd_live.log"
+state_file_path = "../runtime/state/bot_1d_btcfdusd_live.json"
+
+[execution]
+quote_allocation_pct = 0.99
+base_allocation_pct = 1.0
+price_reference = "book"
+limit_price_offset_bps = 0
+prefer_maker_pricing = true
+order_timeout_seconds = 180
+cancel_replace_enabled = true
+max_cancel_replace_attempts = 60
+cancel_replace_interval_seconds = 5
+order_status_poll_seconds = 1
+
+[credentials]
+api_key_env = "BINANCE_1D_API_KEY"
+api_secret_env = "BINANCE_1D_API_SECRET"
+live_trading_env = "LIVE_TRADING"
+
+[binance]
+use_official_sdk_public_endpoints = true
+recv_window_ms = 5000
+request_timeout_seconds = 10
+time_sync_interval_seconds = 1800

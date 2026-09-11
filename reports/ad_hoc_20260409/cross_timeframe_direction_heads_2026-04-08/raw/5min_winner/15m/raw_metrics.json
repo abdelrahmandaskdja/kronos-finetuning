@@ -1,0 +1,38 @@
+{
+  "mode": "direction_eval",
+  "checkpoint_path": "./finetune_csv/runs_requested_by_user/research_5min_direction_head_oldsplit_20260318/checkpoints/best_direction_model.pt",
+  "data_path": "/tmp/BTCUSDT_kline_15m_2025-12-25_to_2026-04-09_00-15_exact.csv",
+  "data_type": "test",
+  "rows": 9570,
+  "rows_valid": 6789,
+  "mask_ambiguous": true,
+  "directional_accuracy": 0.5357195463249373,
+  "avg_bce_loss": 0.6911419278779215,
+  "majority_baseline_accuracy": 0.5015466195315952,
+  "actual_up_ratio": 0.5015466195315952,
+  "predicted_up_ratio": 0.4703196347031963,
+  "confusion": {
+    "tp": 1723,
+    "tn": 1914,
+    "fp": 1470,
+    "fn": 1682
+  },
+  "lookback_window": 512,
+  "horizon_steps": 1,
+  "vol_window": 288,
+  "vol_k": 0.25,
+  "min_eps": 0.0,
+  "clip": 5.0,
+  "split": {
+    "train_ratio": 0.0,
+    "val_ratio": 0.0,
+    "test_ratio": 1.0
+  },
+  "device": "cuda:0",
+  "checkpoint_load": {
+    "missing_keys": [],
+    "unexpected_keys": []
+  },
+  "directional_accuracy_masked": 0.5357195463249373,
+  "avg_bce_loss_masked": 0.6911419278779215
+}

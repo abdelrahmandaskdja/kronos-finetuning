@@ -1,0 +1,184 @@
+{% extends "base_dashboard.html" %}
+
+{% block content %}
+<section class="hero compact reveal">
+    <div class="hero-copy">
+        <p class="eyebrow">Historical Detail</p>
+        <h1>Per-model prediction behavior, not just topline accuracy.</h1>
+        <p class="hero-text">
+            Use the interval switcher to inspect recent signals, rolling hit rate, direction bias, and recent correctness tape for each saved model horizon.
+        </p>
+    </div>
+    <div class="hero-side glass-panel">
+        <span class="meta-label">Rendered</span>
+        <strong>{{ generated_at }}</strong>
+        <p>The chart window is intentionally trimmed so the most recent behavior stays legible.</p>
+    </div>
+</section>
+
+<section class="tab-row reveal">
+    {% for model in models %}
+    <a class="tab-pill {{ 'is-active' if model.slug == selected_slug else '' }}" href="{{ url_for('historical_detail', timeframe=model.slug) }}">
+        <span>{{ model.display_interval }}</span>
+        <strong>{{ model.short_title }}</strong>
+    </a>
+    {% endfor %}
+</section>
+
+<section class="glass-panel reveal">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">{{ detail_payload.summary.display_interval }}</p>
+            <h2>{{ detail_payload.summary.title }}</h2>
+        </div>
+        <span class="status-pill">{{ detail_payload.summary.status_label }}</span>
+    </div>
+
+    <div class="metric-row">
+        <div>
+            <span class="metric-label">Observed Accuracy</span>
+            <strong>{{ detail_payload.summary.observed_accuracy_pct }}%</strong>
+        </div>
+        <div>
+            <span class="metric-label">Baseline</span>
+            <strong>{{ detail_payload.summary.baseline_pct }}%</strong>
+        </div>
+        <div>
+            <span class="metric-label">Bias Gap</span>
+            <strong>{{ detail_payload.summary.bias_gap_pp }} pp</strong>
+        </div>
+        <div>
+            <span class="metric-label">Rows</span>
+            <strong>{{ detail_payload.summary.rows }}</strong>
+        </div>
+    </div>
+
+    <p class="card-note">{{ detail_payload.summary.rationale }}</p>
+    <p class="card-footnote">{{ detail_payload.summary.caveat }}</p>
+</section>
+
+<section class="chart-grid reveal">
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Recent Behavior</p>
+                <h2>Price path and direction calls</h2>
+            </div>
+        </div>
+        <div id="detail-price-chart" class="chart-frame tall"></div>
+    </article>
+
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Rolling Hit Rate</p>
+                <h2>{{ detail_payload.rolling_chart.label }}</h2>
+            </div>
+        </div>
+        <div id="detail-rolling-chart" class="chart-frame"></div>
+    </article>
+</section>
+
+<section class="card-grid compact-grid reveal">
+    <article class="metric-card neutral">
+        <span class="metric-label">True Positives</span>
+        <strong>{{ detail_payload.confusion.tp }}</strong>
+    </article>
+    <article class="metric-card neutral">
+        <span class="metric-label">True Negatives</span>
+        <strong>{{ detail_payload.confusion.tn }}</strong>
+    </article>
+    <article class="metric-card neutral">
+        <span class="metric-label">False Positives</span>
+        <strong>{{ detail_payload.confusion.fp }}</strong>
+    </article>
+    <article class="metric-card neutral">
+        <span class="metric-label">False Negatives</span>
+        <strong>{{ detail_payload.confusion.fn }}</strong>
+    </article>
+    <article class="metric-card neutral">
+        <span class="metric-label">Precision</span>
+        <strong>{{ detail_payload.confusion.precision_pct }}%</strong>
+    </article>
+    <article class="metric-card neutral">
+        <span class="metric-label">Recall</span>
+        <strong>{{ detail_payload.confusion.recall_pct }}%</strong>
+    </article>
+</section>
+
+<section class="split-panel reveal">
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Monthly Breakdown</p>
+                <h2>Where accuracy held and where it slipped</h2>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Rows</th>
+                        <th>Accuracy</th>
+                        <th>Pred Up</th>
+                        <th>Actual Up</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in detail_payload.monthly_breakdown %}
+                    <tr>
+                        <td>{{ row.month }}</td>
+                        <td>{{ row.rows }}</td>
+                        <td>{{ row.accuracy_pct }}%</td>
+                        <td>{{ row.predicted_up_ratio_pct }}%</td>
+                        <td>{{ row.actual_up_ratio_pct }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="glass-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Recent Tape</p>
+                <h2>Latest scored predictions</h2>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Pred</th>
+                        <th>Actual</th>
+                        <th>Correct</th>
+                        <th>Confidence</th>
+                        <th>Pred Close</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in detail_payload.recent_rows %}
+                    <tr>
+                        <td>{{ row.timestamp }}</td>
+                        <td>{{ row.predicted_direction }}</td>
+                        <td>{{ row.actual_direction }}</td>
+                        <td>{{ 'Yes' if row.correct else 'No' }}</td>
+                        <td>{{ (row.confidence_pct ~ '%') if row.confidence_pct is not none else 'n/a' }}</td>
+                        <td>{{ row.predicted_close if row.predicted_close is not none else 'n/a' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.DETAIL_PAYLOAD = {{ detail_payload | tojson }};
+</script>
+{% endblock %}

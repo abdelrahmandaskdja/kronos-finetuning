@@ -1,0 +1,30 @@
+{
+  "model_id": "./finetune_csv/finetuned/BTCUSDT_kline_5min_2018_2025/basemodel/best_model",
+  "tokenizer_id": "./finetune_csv/finetuned/BTCUSDT_kline_5min_2018_2025/tokenizer/best_model",
+  "data_path": "./finetune_csv/data/BTCUSDT_kline_5min_2026_to_now.csv",
+  "rows": 13310,
+  "lookback": 512,
+  "pred_len": 1,
+  "num_windows": 12798,
+  "stride": 1,
+  "batch_size": 64,
+  "device": "cuda:1",
+  "directional_accuracy_close_vs_last_close": 0.48882637912173776,
+  "directional_accuracy_candle_close_vs_open": 0.4906235349273324,
+  "majority_baseline_accuracy": 0.5017190185966557,
+  "actual_up_ratio": 0.5017190185966557,
+  "predicted_up_ratio": 0.25996249413970934,
+  "confusion_close_vs_last_close": {
+    "tp": 1603,
+    "tn": 4653,
+    "fp": 1724,
+    "fn": 4818
+  },
+  "eval_timestamp_utc": "2026-02-17 15:52:38 UTC",
+  "elapsed_seconds": 58.924487829208374,
+  "checkpoint_file": "./finetune_csv/finetuned/BTCUSDT_kline_5min_2018_2025/basemodel/best_model/model.safetensors",
+  "checkpoint_signature": {
+    "mtime_ns": 1771284871550767387,
+    "size": 409264008
+  }
+}

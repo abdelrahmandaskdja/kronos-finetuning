@@ -1,0 +1,55 @@
+# 1D BTCUSDT fine-tuning focused on directional + consecutive-directional accuracy.
+data:
+  data_path: "./finetune_csv/data/BTCUSDT_kline_1d_2017_2024.csv"
+  lookback_window: 128
+  predict_window: 16
+  max_context: 512
+  clip: 5
+  train_ratio: 0.9
+  val_ratio: 0.1
+  test_ratio: 0
+
+training:
+  tokenizer_epochs: 30
+  basemodel_epochs: 3
+  batch_size: 8
+  log_interval: 20
+  num_workers: 0
+  seed: 42
+  tokenizer_learning_rate: 0.0002
+  predictor_learning_rate: 0.000001
+  adam_beta1: 0.9
+  adam_beta2: 0.95
+  adam_weight_decay: 0.1
+  accumulation_steps: 1
+  predictor_ce_loss_weight: 0.0
+  predictor_directional_loss_weight: 1.0
+  predictor_consecutive_directional_loss_weight: 1.0
+  predictor_consecutive_pos_weight: 1.0
+  predictor_consecutive_focal_gamma: 0.0
+  predictor_consecutive_label_smoothing: 0.0
+  predictor_mse_loss_weight: 0.0
+
+model_paths:
+  pretrained_tokenizer: "./finetune_csv/finetuned/BTCUSDT_kline_1d_2018_2025/tokenizer/best_model"
+  pretrained_predictor: "./finetune_csv/finetuned/BTCUSDT_kline_1d_2017_2024_dir_mse/basemodel/best_model"
+  exp_name: "BTCUSDT_kline_1d_2017_2024_dir_cons_only"
+  base_path: "./finetune_csv/finetuned"
+  base_save_path: ""
+  finetuned_tokenizer: "./finetune_csv/finetuned/BTCUSDT_kline_1d_2018_2025/tokenizer/best_model"
+  tokenizer_save_name: "tokenizer"
+  basemodel_save_name: "basemodel"
+
+experiment:
+  name: "kronos_1d_2017_2024_dir_cons_only"
+  description: "BTCUSDT 1d fine-tuning with directional and consecutive-directional objectives only"
+  use_comet: false
+  train_tokenizer: false
+  train_basemodel: true
+  skip_existing: false
+  pre_trained_tokenizer: true
+  pre_trained_predictor: true
+
+device:
+  use_cuda: false
+  device_id: 0
