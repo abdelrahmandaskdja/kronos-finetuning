@@ -1,5 +1,6 @@
 {
   "description": "Selected best models and best-performing cross-timeframe runs from the 2026-01-01 to 2026-04-08 sweep.",
+  "huggingface_repo": "abdelrahman964/kronos-finetuning",
   "best_overall_run": {
     "model_key": "5min_winner",
     "model_label": "5min native direction head",
@@ -10,18 +11,23 @@
     "total_pnl_usdt_1btc": 46239.10999999952,
     "avg_pnl_per_trade_usdt": 4.9148713860543705,
     "compounded_return_pct": 71.84745306185,
-    "checkpoint_path": "./finetune_csv/runs_requested_by_user/research_5min_direction_head_oldsplit_20260318/checkpoints/best_direction_model.pt"
+    "checkpoint_path": "models/5min-native-direction-head/best_direction_model.pt"
   },
   "unique_models": [
     {
       "model_key": "5min_winner",
       "model_label": "5min native direction head",
-      "checkpoint_path": "./finetune_csv/runs_requested_by_user/research_5min_direction_head_oldsplit_20260318/checkpoints/best_direction_model.pt"
+      "checkpoint_path": "models/5min-native-direction-head/best_direction_model.pt"
     },
     {
       "model_key": "1h_pruned50_winner",
       "model_label": "1h pruned50 direction head",
-      "checkpoint_path": "./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu_pruned50/best_direction_model.pt"
+      "checkpoint_path": "models/1h-pruned50-direction-head/best_direction_model.pt"
+    },
+    {
+      "model_key": "1d_winner",
+      "model_label": "1-day last6 consecutive-path adapter",
+      "checkpoint_path": "models/1d-last6-path-adapter/model.safetensors"
     }
   ],
   "top_runs": [
@@ -35,7 +41,7 @@
       "total_pnl_usdt_1btc": 46239.10999999952,
       "avg_pnl_per_trade_usdt": 4.9148713860543705,
       "compounded_return_pct": 71.84745306185,
-      "checkpoint_path": "./finetune_csv/runs_requested_by_user/research_5min_direction_head_oldsplit_20260318/checkpoints/best_direction_model.pt",
+      "checkpoint_path": "models/5min-native-direction-head/best_direction_model.pt",
       "curve_png": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank1_5min_winner_15m_curve.png",
       "curve_csv": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank1_5min_winner_15m_curve.csv",
       "raw_metrics_json": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/raw/5min_winner/15m/raw_metrics.json",
@@ -51,7 +57,7 @@
       "total_pnl_usdt_1btc": 29209.62999999912,
       "avg_pnl_per_trade_usdt": 3.104765093537321,
       "compounded_return_pct": 40.64481848137669,
-      "checkpoint_path": "./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu_pruned50/best_direction_model.pt",
+      "checkpoint_path": "models/1h-pruned50-direction-head/best_direction_model.pt",
       "curve_png": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank2_1h_pruned50_winner_15m_curve.png",
       "curve_csv": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank2_1h_pruned50_winner_15m_curve.csv",
       "raw_metrics_json": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/raw/1h_pruned50_winner/15m/raw_metrics.json",
@@ -67,7 +73,7 @@
       "total_pnl_usdt_1btc": 11998.570000000022,
       "avg_pnl_per_trade_usdt": 5.101432823129261,
       "compounded_return_pct": 12.72692672445066,
-      "checkpoint_path": "./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu_pruned50/best_direction_model.pt",
+      "checkpoint_path": "models/1h-pruned50-direction-head/best_direction_model.pt",
       "curve_png": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank3_1h_pruned50_winner_1h_curve.png",
       "curve_csv": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank3_1h_pruned50_winner_1h_curve.csv",
       "raw_metrics_json": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/raw/1h_pruned50_winner/1h/raw_metrics.json",
@@ -83,7 +89,7 @@
       "total_pnl_usdt_1btc": 8131.92999999976,
       "avg_pnl_per_trade_usdt": 3.457453231292415,
       "compounded_return_pct": 5.403328573692545,
-      "checkpoint_path": "./finetune_csv/runs_requested_by_user/research_5min_direction_head_oldsplit_20260318/checkpoints/best_direction_model.pt",
+      "checkpoint_path": "models/5min-native-direction-head/best_direction_model.pt",
       "curve_png": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank4_5min_winner_1h_curve.png",
       "curve_csv": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/curves/rank4_5min_winner_1h_curve.csv",
       "raw_metrics_json": "./reports/ad_hoc_20260409/cross_timeframe_direction_heads_2026-04-08/raw/5min_winner/1h/raw_metrics.json",

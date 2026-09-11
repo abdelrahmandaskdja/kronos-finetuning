@@ -45,11 +45,13 @@ All three routes then feed:
 - `1d last6 consecutive-path adapter`
   Best saved daily deployment result, but more sensitive to later-window drift.
 
-## Artifact References
+## Public artifact references
 
-- `5min checkpoint`
-  `./finetune_csv/runs_requested_by_user/research_5min_direction_head_oldsplit_20260318/checkpoints/best_direction_model.pt`
-- `1h checkpoint`
-  `./finetune_csv/direction_head_ce_frozen_5min2018_2025_20260304_gpu_pruned50/best_direction_model.pt`
-- `1d checkpoint`
-  `./finetune_csv/runs_requested_by_user/research_1m_multistep_from_epoch4_20260311/screening_trials/cons_only_lr3e6_last6_adapter/finetuned/cons_only_lr3e6_last6_adapter/basemodel/best_model`
+- [5-minute native direction-head checkpoint](https://huggingface.co/abdelrahman964/kronos-finetuning/blob/main/models/5min-native-direction-head/best_direction_model.pt)
+- [1-hour 50% pruned direction-head checkpoint](https://huggingface.co/abdelrahman964/kronos-finetuning/blob/main/models/1h-pruned50-direction-head/best_direction_model.pt)
+- [1-day last-six-layer path-adapter checkpoint](https://huggingface.co/abdelrahman964/kronos-finetuning/blob/main/models/1d-last6-path-adapter/model.safetensors)
+- [Fine-tuned 5-minute Kronos predictor](https://huggingface.co/abdelrahman964/kronos-finetuning/tree/main/models/5min-kronos-base)
+- [Fine-tuned 5-minute tokenizer](https://huggingface.co/abdelrahman964/kronos-finetuning/tree/main/models/5min-tokenizer)
+
+The complete machine-readable inventory is available in the Hugging Face
+[`weights_manifest.json`](https://huggingface.co/abdelrahman964/kronos-finetuning/blob/main/weights_manifest.json).
