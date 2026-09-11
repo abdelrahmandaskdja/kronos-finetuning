@@ -22,6 +22,15 @@ performance. Trading code is provided for research and education; live order
 placement is disabled by default and requires credentials supplied locally via
 environment variables.
 
+## Research poster
+
+The one-page project poster summarizes the problem, interval-specific model
+families, training pipeline, results, pruning sweep, and deployment demo.
+
+[Download the editable PowerPoint poster](docs/Kronos_Research_Poster.pptx)
+
+![Kronos BTC directional forecasting research poster](docs/Kronos_Research_Poster.png)
+
 ## Public-repository safety
 
 Model weights, Hugging Face caches, runtime state, market caches, order/signal
